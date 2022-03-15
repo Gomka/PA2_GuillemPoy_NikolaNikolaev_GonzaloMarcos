@@ -1,24 +1,28 @@
 public class SushiMonitor_01 {
 
-	int[] table;
-	int[] waitingList;
+	int emptySeats = 5;
 	boolean groupEating;
 
 	public void enter(int i) {
 
-		while table is not empty or groupEating 
+		if no emptySeats
+			groupEating = true
+
+		while no emptySeats or groupEating 
 			𝘄𝗮𝗶𝘁𝗖
 		
 		add customer to table
+		decrease emptySeats
 
 	}
 
 	public void exit(int i) {
 
-		𝘀𝗶𝗴𝗻𝗮𝗹𝗖 and release customer from table 
+		increase emptySeats
 
 		If (groupEating and table is empty)
 			groupEating = false
 		
+		𝘀𝗶𝗴𝗻𝗮𝗹𝗖 
 	}
 }
