@@ -1,0 +1,24 @@
+public class SushiMonitor_01 {
+
+	int[] table;
+	int[] waitingList;
+	boolean groupEating;
+
+	public void enter(int i) {
+
+		while table is not empty or groupEating 
+			𝘄𝗮𝗶𝘁𝗖
+		
+		add customer to table
+
+	}
+
+	public void exit(int i) {
+
+		𝘀𝗶𝗴𝗻𝗮𝗹𝗖 and release customer from table 
+
+		If (groupEating and table is empty)
+			groupEating = false
+		
+	}
+}
