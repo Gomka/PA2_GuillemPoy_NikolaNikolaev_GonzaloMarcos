@@ -1,0 +1,34 @@
+public class SushiMonitor_01 {
+
+	int emptySeats = 5;
+	boolean groupEating;
+
+	public void enter(int i) {
+		
+		𝘄𝗮𝗶𝘁𝗖
+		
+		if no emptySeats
+			groupEating = true
+
+		while no emptySeats or groupEating 
+			𝘀𝗶𝗴𝗻𝗮𝗹𝗖
+			yield 
+			𝘄𝗮𝗶𝘁𝗖
+		
+		add customer to table
+		decrease emptySeats
+
+		𝘀𝗶𝗴𝗻𝗮𝗹𝗖 
+
+	}
+
+	public void exit(int i) {
+		𝘄𝗮𝗶𝘁𝗖
+		increase emptySeats
+
+		If (groupEating and table is empty)
+			groupEating = false
+		
+		𝘀𝗶𝗴𝗻𝗮𝗹𝗖	
+	}
+}
