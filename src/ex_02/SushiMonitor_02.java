@@ -11,7 +11,7 @@ public class SushiMonitor_02 {
 	volatile int emptySeats = 5;
 	volatile boolean groupEating = false;
 	Condition canEnter = accessGrantor.newCondition();
-	LinkedList waitingQueue = new LinkedList<Integer>();
+	LinkedList<Integer> waitingQueue = new LinkedList<Integer>();
 
 	public void enter(int i) {
 		/* COMPLETE */
@@ -22,22 +22,18 @@ public class SushiMonitor_02 {
 			System.out.println("*** I'm told to wait for all free C(" + i + ")");
 		}
 
-		while (waitingQueue.size() == 0 || i != (int) waitingQueue.toArray()[0]) {
-			if (!waitingQueue.contains(i))
-				waitingQueue.add(i);
-
-			canEnter.signal();
-			while (groupEating || emptySeats <= 0) {
-				if (emptySeats <= 0 && !groupEating) {
-					System.out.println("*** Possible group detected. I wait C(" + i + ") ");
-					groupEating = true;
-				}
-
-				canEnter.awaitUninterruptibly();
+		if (!waitingQueue.contains(i))
+			waitingQueue.add(i);
+		while (groupEating || emptySeats <= 0 || i != waitingQueue.get(0)) {
+			if (emptySeats <= 0 && !groupEating) {
+				System.out.println("*** Possible group detected. I wait C(" + i + ") ");
+				groupEating = true;
 			}
+			canEnter.signal();
+			canEnter.awaitUninterruptibly();
 		}
 
-		waitingQueue.getFirst();
+		waitingQueue.pop();
 
 		System.out.println("+++ [free: " + emptySeats + "] I sit down C(" + i + ")");
 		emptySeats--;
