@@ -22,11 +22,11 @@ public class SushiMonitor_01 {
 			accessGrantor.lock();
 		}
 
-		if(groupEating) {
+		if (groupEating) {
 			System.out.println("*** I'm told to wait for all free C(" + i + ")");
-				accessGrantor.unlock();
-				Thread.yield();
-				accessGrantor.lock();
+			accessGrantor.unlock();
+			Thread.yield();
+			accessGrantor.lock();
 		}
 
 		while (groupEating || emptySeats == 0) {
@@ -49,7 +49,7 @@ public class SushiMonitor_01 {
 		if (emptySeats == 5) {
 			groupEating = false;
 		}
-		
+
 		accessGrantor.unlock();
 	}
 }
