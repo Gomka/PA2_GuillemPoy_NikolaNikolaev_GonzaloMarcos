@@ -1,34 +1,33 @@
 public class SushiMonitor_01 {
 
-	int emptySeats = 5;
-	boolean groupEating;
+	int emptySeats = 5
+	boolean groupEating = false
+	
+	Condition canEnter
 
 	public void enter(int i) {
 		
-		𝘄𝗮𝗶𝘁𝗖
-		
-		if no emptySeats
-			groupEating = true
+		while(emptySeats <= 0 || groupEating) {
 
-		while no emptySeats or groupEating 
-			𝘀𝗶𝗴𝗻𝗮𝗹𝗖
-			yield 
-			𝘄𝗮𝗶𝘁𝗖
+			if (emptySeats <= 0)
+				groupEating = true
+
+			waitC(canEnter)
+		}
 		
 		add customer to table
 		decrease emptySeats
 
-		𝘀𝗶𝗴𝗻𝗮𝗹𝗖 
-
+		signalC(canEnter)
 	}
 
 	public void exit(int i) {
-		𝘄𝗮𝗶𝘁𝗖
+
 		increase emptySeats
 
-		If (groupEating and table is empty)
+		if (emptySeats >= 5)
 			groupEating = false
 		
-		𝘀𝗶𝗴𝗻𝗮𝗹𝗖	
+		signalC(canEnter)
 	}
 }
