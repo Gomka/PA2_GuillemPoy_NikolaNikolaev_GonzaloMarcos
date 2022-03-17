@@ -4,32 +4,32 @@ import java.util.LinkedList;
 import java.util.concurrent.locks.*;
 
 public class SushiMonitor_03 {
-	
+
 	Lock accessGrantor = new ReentrantLock(false);
 	volatile int emptySeats = 5;
 	volatile boolean groupEating = false;
 	Condition canEnter = accessGrantor.newCondition();
 	LinkedList<Integer> waitingQueue = new LinkedList<Integer>();
-	int waitingVips = 0;
-	
-	public void enterVIP (int i) {
+	volatile int waitingVips = 0;
+
+	public void enterVIP(int i) {
 		accessGrantor.lock();
 		waitingVips++;
-		
-		System.out.println("----> Entering VIPC("+ i +")");
+
+		System.out.println("----> Entering VIPC(" + i + ")");
 
 		while (emptySeats <= 0) {
 			canEnter.awaitUninterruptibly();
 		}
 
-		System.out.println("+++ [free: "+ emptySeats +"] I sit down VIPC(" + i + ")");
-		emptySeats--;		
+		System.out.println("+++ [free: " + emptySeats + "] I sit down VIPC(" + i + ")");
+		emptySeats--;
 		waitingVips--;
 		groupEating = false;
 		accessGrantor.unlock();
 	}
-	
-	public void exitVIP (int i) {
+
+	public void exitVIP(int i) {
 		accessGrantor.lock();
 		emptySeats++;
 		System.out.println("---> now leaving [free: " + emptySeats + "] VIPC(" + i + ")");
@@ -42,7 +42,7 @@ public class SushiMonitor_03 {
 
 		accessGrantor.unlock();
 	}
-	
+
 	public void enter(int i) {
 		/* COMPLETE */
 		accessGrantor.lock();
